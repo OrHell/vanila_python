@@ -4,15 +4,15 @@ import subprocess
 import shutil
 import glob,os
 from termcolor import colored
-import os    	
+import os
 def creat_file():
 	Big = 'QWERTYUIOPASDFGHJKLZXCVBNM'
 	Low = 'qwertyuiopasdfghjklzxcvbnm'
 	Num = '1234567890'
 	Spe = '!@#$%^&*()'
-	BI = False  
-	LO = True  
-	NU = True  
+	BI = False
+	LO = True
+	NU = True
 	PS = True 
 	Password_len = input('Length passwords: ')
 
@@ -29,7 +29,7 @@ def creat_file():
 
 	Password_cou = input('Number of passwords: ')
 	print('\n')
-	
+
 	if Password_cou:
 	   if Password_cou.isdigit() == True:
 	       Password_cou = int(Password_cou)
@@ -59,7 +59,7 @@ def creat_file():
 	for yx in range(Password_cou):
 	   psw.append(''.join([random.choice(Pass_Symbol) for x in range(Password_len)]))
 
-	
+
 	chose = input('Old pass have been rewrite - continue (yes/no) ?...')
 	if chose == 'yes':
 		file_Pass = open('Password.txt', 'w')
@@ -67,14 +67,14 @@ def creat_file():
 		file_Pass.close()
 		subprocess.call(['attrib', '+h', 'Password.txt'])
 		print('File created successfully >>>')
-	
+
 	if chose == 'no':
 		return main()
-	
+
 	return main()
 
 def dont_work():
-	
+
 	print('\n')
 	f = open('Password.txt', 'r+')
 	s= f.read()
@@ -92,15 +92,18 @@ def delete_file():
 		print ('YOU KILL HIM !!!')
 
 	else:
-		return main()	
+		return main()
+	return main()
 
 
 
 
 def main():
-	print('===========================')
-	print('          MENTALL          ')
-	print('===========================')
+	os.system("mode con cols=30 lines=10")
+
+	print('==============================')
+	print('            MENTALL          ')
+	print('==============================')
 	print ('1. Create')
 	print ('2. Open file')
 	print('3. Delete file')
@@ -110,9 +113,9 @@ def main():
 		return dont_work()
 	if option =='3':
 		return delete_file()
-	   
+
 	if option == '1':
-		
+
 		return creat_file()
 	if option == '4':
 	   exit()
