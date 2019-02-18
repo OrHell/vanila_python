@@ -15,6 +15,7 @@ def creat_file():#Функция генерации пароля, а также 
 	LO = True
 	NU = True
 	PS = True 
+	password_list_name_tree = input('Введите имя файла:')
 	Password_len = input('Длинна пароля: ')
 
 
@@ -61,13 +62,13 @@ def creat_file():#Функция генерации пароля, а также 
 	   psw.append(''.join([random.choice(Pass_Symbol) for x in range(Password_len)]))
 
 
-	chose = input('Последний созданный список паролей будет безвозвратно удален (y/n) ?...')
+	chose = input('Последний созданный список паролей с одинаковым именем будет безвозвратно удален (y/n) ?...')
 	if chose == 'y':
-		subprocess.call(['attrib', '-h', 'Password.txt'])
-		file_Pass = open('Password.txt', 'w')
+		subprocess.call(['attrib', '-h',  password_list_name_tree+'.txt'])
+		file_Pass = open( password_list_name_tree+'.txt', 'w')
 		file_Pass.write('\n'.join(psw))
 		file_Pass.close()
-		subprocess.call(['attrib', '+h', 'Password.txt'])
+		subprocess.call(['attrib', '+h',  password_list_name_tree+'.txt'])
 		print('Список паролей создан успешно >>>')
 
 	if chose == 'n':
@@ -76,17 +77,18 @@ def creat_file():#Функция генерации пароля, а также 
 	return main()
 
 def dont_work():#Функция чтения изи файла и вывод паролей в консоль в будущем добавить ключ вводимы чтобы прочитать пароли
+	password_list_name_two = input('Введите имя файла:')
 	password_key = input('Введите ключ доступа к файлу >>')
 	if password_key == '2584':
-		subprocess.call(['attrib', '-h', 'Password.txt'])
-		if os.path.exists('Password.txt'):
+		subprocess.call(['attrib', '-h',  password_list_name_two+'.txt'])
+		if os.path.exists(password_list_name_two+'.txt'):
 			print('\n')
-			f = open('Password.txt', 'r+')
+			f = open(password_list_name_two+'.txt', 'r+')
 			s= f.read()
 			print (s)
 			f.close()
 			print('\n')
-			subprocess.call(['attrib', '+h', 'Password.txt'])
+			subprocess.call(['attrib', '+h', password_list_name_two+'.txt'])
 			return main()
 		else:
 			print ('Файл не найден')
@@ -96,18 +98,22 @@ def dont_work():#Функция чтения изи файла и вывод п�
 		return main()
 
 def delete_file():#Функция удаления файла и проверка его существования
-	subprocess.call(['attrib', '-h', 'Password.txt'])
-	maybe = input('Удалить последний созданный файл (y/n)?...')
-	if maybe =='y':
-		
-		os.remove(os.path.join('Password.txt'))
-		print ('YOU KILL HIM !!!')
-		section = input('Продолжить работу ? (y/n)')
-		if section == 'y':
-			return main()
+	password_list_name = input('Введите имя файла:')
+	password_key_two = input('Введите ключ доступа к файлу >>')
+	if password_key_two == '2584':
+		subprocess.call(['attrib', '-h', password_list_name+'.txt'])
+		maybe = input('Удалить этот файл (y/n)?...')
+		if maybe =='y':
+			
+			os.remove(os.path.join(password_list_name+'.txt'))
+			print ('YOU KILL HIM !!!')
+			section = input('Продолжить работу ? (y/n)')
+			if section == 'y':
+				return main()
 
-	else:
-		return main()
+		else:
+			print ('Пароль неверен')
+			return main()
 	
 
 
@@ -120,7 +126,7 @@ def main():
 	print('            MENTALL           ')
 	print('==============================')
 	print ('1. Создать новый список паролей')
-	print ('2. Открыть последний созданный список')
+	print ('2. Открыть список')
 	print('3. Удалить список паролей')
 	print ('4. Выйти')
 	print('5. Открыть redme.txt')
