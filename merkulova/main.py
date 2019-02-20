@@ -11,9 +11,6 @@ def auth_user():
 		return zip_direct()
 	else:
 		return main()
-
-
-
 def zip_direct():
 	name_archive = input('Name zipfile:')
 	source_ku = input ('Save location zipfile:')
@@ -31,16 +28,7 @@ def zip_direct():
 		i=i+1
 		for x in progressbar.progressbar(range(100)):
 			time.sleep(chislo/100)
-		print (i,'- Archiving was successful - No errors found')
-
-
-    
-
-    		
-	#	for x in tqdm(range(0,20000)):
-			#for x in range(0,10000):
-		#		x*=chislo*0.002
-		
+		print (i,'- Archiving was successful - No errors found')		
 	return main()
 def main():	
 	print('==============================')
@@ -56,6 +44,10 @@ def main():
 	if option == '1':
 		return auth_user()
 	if option == '2':
+		
+		read_me =open ('readme.txt','w')
+		read_me.write("Username and Password: 2584")
+		read_me.close()
 		webbrowser.open('readme.txt')
 		return main()
 	if option == '3':
