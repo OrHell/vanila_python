@@ -114,8 +114,50 @@ def delete_file():#Функция удаления файла и проверк�
 		else:
 			print ('Пароль неверен')
 			return main()
-	
+def password_generation_func():
+	lsiting_1 = 'qwertyuiopasdfghjklzxcvbnm'
+	lsiting_2 = '1234567890'
+	lsiting_3 = lsiting_1.upper()
+	listing_4 = lsiting_1+lsiting_3+lsiting_2
+	lis = list(listing_4)
+	random.shuffle(lis)
+	password_generation = ''.join([random.choice(lis) for x in range(10)])
+	print(password_generation)
+	okey = input('Сгенерировать другой ?(y/n)')
+	if okey =='y':
+		return password_generation_func()
+	else:
+		yorself_pas_name = input('От чего он:')
+		file_your_pass_two = input('В какой список записать ваш пароль:')
+		subprocess.call(['attrib', '-h', file_your_pass_two +'.txt'])
+		yorself_pas = open(file_your_pass_two+'.txt', 'a')
+		yorself_pas.write('\n'+yorself_pas_name+':'+password_generation)
+		yorself_pas.close()
+		print ('Ваш пароль был успешно добавлен :3')
+		subprocess.call(['attrib', '+h', file_your_pass_two +'.txt'])
+		return main()
 
+
+def yorself_password():
+	print('1.Сгенерировать')
+	print('2.Записать самому')
+	choose_two = input('>')
+	if choose_two == '1':
+		return password_generation_func()
+		
+	else:
+		your_pass = input('Введите свой пароль:')
+		yorself_pas_name = input('От чего он:')
+		file_your_pass = input('В какой список записать ваш пароль:')
+		subprocess.call(['attrib', '-h', file_your_pass +'.txt'])
+		yorself_pas = open(file_your_pass+'.txt', 'a')
+		yorself_pas.write('\n'+yorself_pas_name+':'+ your_pass)
+		yorself_pas.close()
+		subprocess.call(['attrib', '+h', file_your_pass +'.txt'])
+		print ('Ваш пароль был успешно добавлен :3')
+		return main()
+
+	
 
 
 
@@ -128,8 +170,9 @@ def main():
 	print ('1. Создать новый список паролей')
 	print ('2. Открыть список')
 	print('3. Удалить список паролей')
-	print ('4. Выйти')
-	print('5. Открыть redme.txt')
+	print ('4. Добавить свой пароль к списку')
+	print ('5. Выйти')
+	print('6. Открыть redme.txt')
 	print('==============================')
 	print('            ENDLINE            ')
 	print('==============================')
@@ -138,13 +181,18 @@ def main():
 		return dont_work()
 	if option =='3':
 		return delete_file()
+	if option =='4':
+		return yorself_password()
 
 	if option == '1':
 		return creat_file()
-	if option == '5':
+	if option == '6':
+		read_me =open ('readme.txt','w')
+		read_me.write("Username and Password: 2584")
+		read_me.close()
 		webbrowser.open('readme.txt')
 		return main()
-	if option == '4':
+	if option == '5':
 	   exit()
 	
 if __name__ == '__main__':
