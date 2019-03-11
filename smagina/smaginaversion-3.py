@@ -4,49 +4,50 @@ from shutil import copyfile
 import shutil
 import progressbar
 def main():
-	i = 0
-	arr1=[0]*10
-	surce_file=("C:\\Users\\Гусев\\Desktop\\Projects\\smagina\\test\\file.txt")
-	surce_direct = ("C:\\Users\\Гусев\\Desktop\\Projects\\smagina")
+	
+	newpath = r'C:\\info\\order' 
+	if not os.path.exists(newpath):
+		os.makedirs(newpath)
+	i=0
+	surce_file=("C:\\info\\file.txt")
+	surce_direct = ("C:\\info")
 	while i<666:
 		file_delet = open(surce_file,'w')
 		file_delet.close()
-		for file in os.listdir(surce_direct):
-			if file.endswith(".txt"):
-				read_file = open(file,'r')
-				s=read_file.read()
-				
-				file_file_txt=open(surce_file,'a')
-				file_file_txt.write(s+"\n")
-				
-				file_file_txt.close()
-				read_file.close()
-				print("File detected")
-			
+		file_quant_open= open('C:\\info\\QualityOrder.txt','r')
+		file_name_image = open('C:\\info\\Name_imageOrder.txt','r')
+		str_image = file_name_image.read()
+		str_qunt = file_quant_open.read()
+		file_quant_open.close()
+		file_name_image.close()
 
-
+		file_file_txt = open(surce_file,'w')
+		file_file_txt.write(str_image+'\n'+str_qunt)
+		file_file_txt.close()
 
 		for x in progressbar.progressbar(range(100)):
-			time.sleep(15/100)
-		surce2 =("C:\\Users\\Гусев\\Desktop\\Projects\\smagina\\test\\file.txt")
-		f=open(surce2,'r')
+			time.sleep(5/100)
+		
+		
+		f=open('C:\\info\\file.txt','r')
 		s= f.read()
 		f.close()
 		b=[0]
+		
 		b=s.split("\n")
+		
 		name_image = b[0]
 		quantity = b[1]
 
 
+
 		name_arr=name_image.split(';')
 		del name_arr[len(name_arr)-1]
-		#print(name_arr)
+	
 
 
 		quantity_arr=quantity.split(';')
 		del quantity_arr[len(quantity_arr)-1]#delte element
-		y=1
-		x=0
 		i=0
 		quant_len=len(quantity_arr)
 		name_len = len(name_arr)+1
@@ -61,12 +62,12 @@ def main():
 
 		for i in range (0,quant_len):
 
-			s1=name_arr[i]
+			s1="Выполнить деталь в количестве :"
 			ls1=str(s1)
 			s2=quantity_arr[i]
 			ls2=str(s2)
-			file_new=open('C:\\Users\\Гусев\\Desktop\\Projects\\smagina\\order\\'+list_list[i]+'.txt','w')
-			file_new.write(ls1+ls2)
+			file_new=open('C:\\info\\order\\'+list_list[i]+'.txt','w')
+			file_new.write(ls1+ls2+"шт")
 			file_new.close()
 
 			cur_dir = os.getcwd()
@@ -77,12 +78,7 @@ def main():
 	
 			if file_name in file_list:
 				os.rename(file_name, list_list[i]+'.png')
-				shutil.move(list_list[i]+'.png', "C:\\Users\\Гусев\\Desktop\\Projects\\smagina\\order")
-				#copyfile("C:\\Users\\Гусев\\Desktop\\Projects\\smagina\\order",list_list[i]+'.png')
-		      
-
-	
-
-	
+				shutil.move(list_list[i]+'.png', "C:\\info\\order")
+				
 if __name__ == '__main__':
 	main()
