@@ -1,3 +1,5 @@
 import moviepy.editor as mp
-clip = mp.VideoFileClip("myvideo.mp4").subclip(0,20)
+
+
+clip = mp.VideoFileClip("Prekrasnoe Daleko.mp4")
 clip.audio.write_audiofile("theaudio.mp3")
