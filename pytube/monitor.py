@@ -11,9 +11,9 @@ time_power = toFixed(time_power,2)
 
 print(today)
 print(now) 
-print(time_power) #Время с включения пк
-print(psutil.cpu_percent(interval=1)) #Загрузка процессора
-print(psutil.sensors_battery()) #батарея
-print(psutil.cpu_count())
+print("Время работы ПК: ",time_power) #Время с включения пк
+print("Загрузка CPU: ",psutil.cpu_percent(interval=1),"%") #Загрузка процессора
+print("Заряд батареи: ",psutil.sensors_battery()) #батарея
+print("Кол-во ядер CPU: ",psutil.cpu_count())
 print(psutil.cpu_stats())
 #psutil.sensors_temperatures()
