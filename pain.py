@@ -7,11 +7,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 df=pd.read_csv('parkinsons.data')
 df.head()
-#DataFlair - Get the features and labels
+
+
 features=df.loc[:,df.columns!='status'].values[:,1:]
 labels=df.loc[:,'status'].values
 print(labels[labels==1].shape[0], labels[labels==0].shape[0])
-#DataFlair - Scale the features to between -1 and 1
+
+
 scaler=MinMaxScaler((-1,1))
 x=scaler.fit_transform(features)
 y=labels
